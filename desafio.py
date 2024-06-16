@@ -25,7 +25,7 @@ while True:
         deposit_value = float(input("Inform the amount for deposit: "))
         if deposit_value > 0:
             balance += deposit_value
-            extract += str(f"deposit: + R${deposit_value:.2f}\n")
+            extract += f"deposit: + R${deposit_value:.2f}\n"
             print("Deposit succesfull!")
         else:
             print("Failed, the amount is invalid!")
@@ -33,27 +33,27 @@ while True:
     elif option == "2":
         if number_of_withdraws < 3:
             withdraw_value = float(input("Inform the amount for withdraw: "))
-            if withdraw_value <= balance:
-                if withdraw_value <= limit:
-                    balance -= withdraw_value
-                    extract += str(f"withdraw: - R${withdraw_value:.2f}\n")
-                    number_of_withdraws += 1
-                    print("Withdraw succesfull!")
+            if withdraw_value >= 0:
+                if withdraw_value <= balance:
+                    if withdraw_value <= limit:
+                        balance -= withdraw_value
+                        extract += f"withdraw: - R${withdraw_value:.2f}\n"
+                        number_of_withdraws += 1
+                        print("Withdraw succesfull!")
+                    else:
+                        print("Withdraw failed, maximum value per operation exceeded!")
                 else:
-                    print("Withdraw failed, maximum value per operation exceeded!")
+                    print("Withdraw failed, not enough funds.")
             else:
-                print("Withdraw failed, not enough funds.")
+                print("Value is invalid!")
         else:
             print("Sorry, you reached the limit of withdraws today...")
     
     elif option == "3":
-        if not extract:
             print("\n-----------EXTRACT-----------")
-            print(extract)
+            print("Não foram realizadas movimentações." if not extract else extract)
             print(f"\nBalance: R$ {balance:.2f}")
             print("\n-----------------------------")
-        else:
-            print("Não foram realizadas movimentações.")
 
     elif option == "4":
         break
